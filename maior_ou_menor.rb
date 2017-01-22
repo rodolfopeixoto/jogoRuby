@@ -13,7 +13,7 @@
     puts "\n\n"
 
     puts "---------------------------------------------"
-    puts "Começaremos o jogo para você, " + nome
+    puts "Começaremos o jogo para você, #{nome} "
     puts "---------------------------------------------"
     puts "\n"
 
@@ -28,11 +28,11 @@
 
   def pede_um_numero(chutes,tentativa, limite_de_tentativas)
     puts "\n\n"
-    puts "Tentativa " + tentativa.to_s + " de " + limite_de_tentativas.to_s
-    puts "Chutes até agora: " + chutes.to_s
+    puts "Tentativa #{tentativa} de #{limite_de_tentativas}"
+    puts "Chutes até agora: #{chutes} "
     puts "Entre com o número"
     chute = gets.strip
-    puts "Será que acertou? Você chutou \n" + chute
+    puts "Será que acertou? Você chutou \n #{chute}"
     chute.to_i
   end
 
