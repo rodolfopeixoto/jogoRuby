@@ -8,7 +8,7 @@
     puts "\n\n"
 
     puts "Qual é o seu nome?"
-    nome = gets
+    nome = gets.strip
 
     puts "\n\n"
 
@@ -31,7 +31,7 @@
     puts "Tentativa " + tentativa.to_s + " de " + limite_de_tentativas.to_s
     puts "Chutes até agora: " + chutes.to_s
     puts "Entre com o número"
-    chute = gets
+    chute = gets.strip
     puts "Será que acertou? Você chutou \n" + chute
     chute.to_i
   end
