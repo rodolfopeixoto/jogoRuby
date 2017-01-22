@@ -42,23 +42,22 @@
       puts "Acertou!"
       puts "**************************************"
       puts "\n"
-      return true
-    else
-      maior = numero_secreto > chute
-        if maior
-          puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-          puts "O número secreto é maior!"
-          puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-          puts "\n"
-          return false
-        else
-          puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-          puts "O número secreto é menor!"
-          puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-          puts "\n"
-          return false
-        end
+      true
     end
+
+    maior = numero_secreto > chute
+      if maior
+        puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+        puts "O número secreto é maior!"
+        puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+        puts "\n"
+      else
+        puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+        puts "O número secreto é menor!"
+        puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+        puts "\n"
+      end
+      false
   end
 
   da_boas_vindas
