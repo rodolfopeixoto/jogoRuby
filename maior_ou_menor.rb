@@ -67,7 +67,5 @@ limite_de_tentativas = 5
 
 for tentativa in 1..limite_de_tentativas
   chute          = pede_um_numero(tentativa, limite_de_tentativas)
-  if verifica_se_acertou(numero_secreto, chute)
-   break
-  end
+  break if verifica_se_acertou(numero_secreto, chute)
 end
