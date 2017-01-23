@@ -1,23 +1,18 @@
   def da_boas_vindas
-    puts "########################################################"
-
-    puts "\tSeja-bem vindo ao jogo da advinhação"
-
-    puts "########################################################"
-
-    puts "\n\n"
-
+    puts
+    puts "        P  /_\  P                              "
+    puts "       /_\_|_|_/_\                             "
+    puts "   n_n | ||. .|| | n_n         Bem vindo ao    "
+    puts "   |_|_|nnnn nnnn|_|_|     Jogo de Adivinhação!"
+    puts "  |' '  |  |_|  |'  ' |                        "
+    puts "  |_____| ' _ ' |_____|                        "
+    puts "        \__|_|__/                              "
+    puts
     puts "Qual é o seu nome?"
     nome = gets.strip
-
-    puts "\n\n"
-
-    puts "---------------------------------------------"
-    puts "Começaremos o jogo para você, #{nome} "
-    puts "---------------------------------------------"
-    puts "\n"
+    puts "\n\n\n\n\n\n"
+    puts "Começaremos o jogo para você, #{nome}"
     nome
-
   end
 
   def sorteia_numero_secreto(dificuldade)
@@ -53,10 +48,7 @@
   def verifica_se_acertou(numero_secreto, chute)
     acertou = numero_secreto == chute
     if acertou
-      puts "**************************************"
-      puts "Acertou!"
-      puts "**************************************"
-      puts "\n"
+      ganhou
       return true
     end
 
@@ -75,34 +67,72 @@
       false
   end
 
+  def ganhou
+    puts
+    puts "             OOOOOOOOOOO               "
+    puts "         OOOOOOOOOOOOOOOOOOO           "
+    puts "      OOOOOO  OOOOOOOOO  OOOOOO        "
+    puts "    OOOOOO      OOOOO      OOOOOO      "
+    puts "  OOOOOOOO  #   OOOOO  #   OOOOOOOO    "
+    puts " OOOOOOOOOO    OOOOOOO    OOOOOOOOOO   "
+    puts "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO  "
+    puts "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO  "
+    puts "OOOO  OOOOOOOOOOOOOOOOOOOOOOOOO  OOOO  "
+    puts " OOOO  OOOOOOOOOOOOOOOOOOOOOOO  OOOO   "
+    puts "  OOOO   OOOOOOOOOOOOOOOOOOOO  OOOO    "
+    puts "    OOOOO   OOOOOOOOOOOOOOO   OOOO     "
+    puts "      OOOOOO   OOOOOOOOO   OOOOOO      "
+    puts "         OOOOOO         OOOOOO         "
+    puts "             OOOOOOOOOOOO              "
+    puts
+    puts "               Acertou!                "
+    puts
+  end
+
   def pede_dificuldade
-    puts "Qual o nível de dificuldade que deseja? (1 - fácil, 5 - difícil)"
+    puts "Qual o nível de dificuldade?"
+    puts "(1) Muito fácil (2) Fácil (3) Normal (4) Difícil (5) Impossível"
+    puts "Escolha: "
     dificuldade = gets.to_i
+  end
+
+  def joga(nome, dificuldade)
+    numero_secreto = sorteia_numero_secreto dificuldade
+    pontos_ate_agora = 1000
+    limite_de_tentativas = 5
+    chutes = []
+
+    for tentativa in 1..limite_de_tentativas
+      chute          = pede_um_numero chutes, tentativa, limite_de_tentativas
+      chutes << chute
+
+      if nome == "Rodo"
+        ganhou
+        break
+      end
+
+      pontos_a_perder  = (chute - numero_secreto).abs / 2.0
+      pontos_ate_agora -= pontos_a_perder
+
+     break if verifica_se_acertou numero_secreto, chute
+    end
+
+    puts "Você ganhou #{pontos_ate_agora} pontos."
+    # puts "\n #{numero_secreto}"
+  end
+
+  def nao_quer_jogar?
+    puts "Deseja jogar novamente? (S/N)"
+    quer_jogar = gets.strip
+    nao_quero_jogar = quer_jogar.upcase == "N"
   end
 
   nome = da_boas_vindas
   dificuldade = pede_dificuldade
-  numero_secreto = sorteia_numero_secreto dificuldade
 
-  pontos_ate_agora = 1000
-
-limite_de_tentativas = 5
-chutes = []
-
-for tentativa in 1..limite_de_tentativas
-  chute          = pede_um_numero chutes, tentativa, limite_de_tentativas
-  chutes << chute
-
-  if nome == "Rodolfo"
-    puts "Acertou!"
-    break
+  loop do
+    joga nome, dificuldade
+    if  nao_quer_jogar?
+      break
+    end
   end
-
-  pontos_a_perder  = (chute - numero_secreto).abs / 2.0
-  pontos_ate_agora -= pontos_a_perder
-
-  break if verifica_se_acertou numero_secreto, chute
-end
-
-puts "Você ganhou #{pontos_ate_agora} pontos."
-# puts "\n #{numero_secreto}"
