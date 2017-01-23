@@ -1,7 +1,30 @@
  require_relative 'ui_forca'
 
-  def pede_chute_valido(chutes, erros)
-    cabecalho_de_tentativa chutes, erros
+
+
+  def escolha_palavra_secreta
+   avisa_escolhendo_palavra
+   texto = File.read("dicionario.txt")
+   todas_as_palavras = texto.split("\n")
+   numero_escolhido = rand(todas_as_palavras.size)
+   palavra_secreta = todas_as_palavras[numero_escolhido].downcase
+   avisa_palavra_escolhida palavra_secreta
+  end
+
+  def palavra_mascarada(chutes, palavra_secreta)
+    mascara = ""
+    for letra in palavra_secreta.chars
+      if chutes.include? letra
+        mascara << letra
+      else
+        mascara << "_"
+      end
+    end
+    mascara
+  end
+
+  def pede_chute_valido(chutes, erros, mascara)
+    cabecalho_de_tentativa chutes, erros, mascara
     loop do
     chute = pede_um_chute
         if chutes.include? chute
@@ -20,8 +43,9 @@
     pontos_ate_agora = 0
 
     while erros < 5
-      chute  = pede_chute_valido chutes, erros
-      chutes << chute
+      mascara   = palavra_mascarada chutes, palavra_secreta
+      chute     = pede_chute_valido chutes, erros, mascara
+      chutes    << chute
 
       chutou_uma_letra = chute.size == 1
 
