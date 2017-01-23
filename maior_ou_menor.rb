@@ -34,8 +34,8 @@
         maximo = 200
     end
 
-    puts "Escolha um número secreto entre 0 e #{maximo - 1}..."
-    sorteado = rand(maximo)
+    puts "Escolha um número secreto entre 1 e #{maximo}..."
+    sorteado = rand(maximo) + 1
     puts "Escolhido... que tal advinha hoje o número secreto?"
     sorteado
   end
