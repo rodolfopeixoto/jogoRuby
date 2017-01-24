@@ -6,15 +6,17 @@ require_relative 'ui'
     mapa = texto.split("\n")
   end
 
-  def encontra_jogador(mapa)
-    for linha = 0..(mapa.size - 1)
-      if mapa[linha].include? "H"
-        for coluna = 0..(mapa[linha].size-1)
-        #achei
-      end
+def encontra_jogador(mapa)
+    caracter_do_heroi = "H"
+    for linha = 0..(mapa.size-1)
+        linha_atual = mapa[linha]
+        coluna_do_heroi = linha_atual.index caracter_do_heroi
+        if coluna_do_heroi
+            # achei!
+        end
     end
-    #nao achei
-  end
+    # não achei!
+end
 
   def joga(nome)
     mapa = le_mapa(1)
