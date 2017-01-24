@@ -1,4 +1,5 @@
  require_relative 'ui_forca'
+ require_relative 'rank'
 
 
 
@@ -49,6 +50,8 @@
   end
 
   def joga(nome)
+
+    puts "To na funcao joga(nome) final"
     palavra_secreta = escolha_palavra_secreta
 
     erros = 0
@@ -79,7 +82,7 @@
           avisa_letra_encontrada total_encontrado
         end
 
-      else
+     else
         acertou = chute == palavra_secreta
         if acertou
           avisa_acertou_a_palavra
@@ -95,15 +98,25 @@
     end
 
     avisa_pontos pontos_ate_agora
+    pontos_ate_agora
 
   end
 
 
   def jogo_da_forca
     nome = da_boas_vindas
+    pontos_totais = 0
 
-    loop do
-      joga nome
+    if le_rank[1].to_i < pontos_totais
+      avisa_campeao_atual le_rank
+    end
+
+     loop do
+      puts "[1] = jogo da forca pontos_totais = #{pontos_totais}"
+      pontos_totais += joga nome
+      puts "[2] = jogo da forca pontos_totais = #{pontos_totais}"
+      avisa_pontos_totais pontos_totais
+      salva_rank nome, pontos_totais
       if nao_quer_jogar?
         break
       end
