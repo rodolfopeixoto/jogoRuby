@@ -49,8 +49,49 @@ def posicao_valida?(mapa, posicao)
     true
 end
 
+def posicoes_validas_a_partir(mapa, posicao)
+  posicoes  = []
+  baixo     = [posicao[0] + 1, posicao[1]]
+  if posicao_valida? mapa, baixo
+    posicoes << baixo
+  end
+  cima      = [posicao[0], posicao[1] + 1]
+  if posicao_valida? mapa, cima
+    posicoes << cima
+  end
+  direita   = [posicao[0], posicao[1] + 1]]
+  if posicao_valida? mapa, direita
+    posicoes << direita
+  end
+  esquerda  = [posicao[0], posicao[1] - 1]
+  if posicao_valida? mapa, esquerda
+    posicoes << esquerda
+  end
+  posicoes
+end
+
+  def copia_mapa(mapa)
+    novo_mapa = []
+    mapa.each do |linha|
+      nova_linha = ""
+      linha.each do |caractere|
+       if caractere == "F"
+         nova_linha << " "
+       else
+         nova_linha << caractere
+       end
+      end
+      novo_mapa << nova_linha
+    end
+    novo_mapa
+  end
+
 def move_fantasma(mapa,linha,coluna)
-  posicao = [linha, coluna + 1]
+  posicoes = posicoes_validas_a_partir mapa, [linha,coluna]
+
+  return if posicoes.empty?
+
+  posicao = posicoes[0]
   if posicao_valida? mapa, posicao
     mapa[linha][coluna] = " "
     mapa[posicao[0]][posicao[1]] = "F"
