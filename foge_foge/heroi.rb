@@ -14,4 +14,21 @@ class Heroi
     novo_heroi.coluna += movimento[1]
     novo_heroi
   end
+
+  def to_array
+    [linha,coluna]
+  end
+
+  def remove_do(mapa)
+    mapa[linha][coluna] = " "
+  end
+
+  def coloca_no(mapa)
+    mapa[nova_posicao.linha][nova_posicao.coluna] = "H"
+  end
+
+  def direita
+    calcula_nova_posicao "D"
+  end
+
 end
