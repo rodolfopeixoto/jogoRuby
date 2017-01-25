@@ -1,3 +1,17 @@
+module Contador
+  def << (livro)
+    push (livro)
+    if @maximo_necessario.nil? || @maximo_necessario < size
+      @maximo_necessario = size
+    end
+    self
+  end
+
+  def maximo_necessario
+    @maximo_necessario
+  end
+end
+
 class Livro
   attr_reader :titulo, :preco, :ano_lancamento
 
@@ -45,8 +59,11 @@ end
 
 class Estoque
 
+  attr_accessor :livros
+
   def initialize
     @livros = []
+    @livros.extend Contador
   end
 
   def exporta_csv
@@ -71,11 +88,13 @@ class Estoque
 end
 
 
+  algoritmos   =  Livro.new("Algoritmos", 100, 1998,true)
+  arquitetura  =  Livro.new("Introdução a Arquitetura e Design de Software", 100, 1998, true)
+  programmer   =  Livro.new("The Pragmatic Programmer", 100, 1999, true)
+  ruby         =  Livro.new("Programming Ruby", 100, 2004, true)
 
-  algoritmos = Livro.new("Algoritmos", 100, 1998,true)
   estoque = Estoque.new
-  estoque.adiciona(algoritmos)
-  baratos = estoque.mais_barato_que(80)
-  estoque.adiciona  Livro.new("The Pragmatic Programmer", 100, 1999, true)
-  estoque.adiciona  Livro.new("Programming Ruby", 100, 2004, true)
-  estoque.exporta_csv
+  estoque.livros << algoritmos
+  estoque.livros << arquitetura
+  estoque..livros << programmer << ruby
+  puts estoque.livros_maximo_necessario
